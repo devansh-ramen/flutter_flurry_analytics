@@ -6,7 +6,7 @@ class FlurryAnalytics {
   static const MethodChannel _channel =
       const MethodChannel('flurry_analytics');
 
-  static Future<Null> initialize({String androidKEY = "", String iosKEY = "", bool enableLog = true}) async {
+  static Future<Null> initialize({String androidKey = "", String iosKey = "", bool enableLog = true}) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("api_key_android", () => androidKEY);
     args.putIfAbsent("api_key_ios", () => iosKEY);

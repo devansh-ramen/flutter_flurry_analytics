@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      await FlurryAnalytics.initialize(androidKEY: "QX7WZTNJ8468J6SR8DR3", iosKEY: "XCCWQH4MCD45JHSM4BYN", enableLog: true);
+      await FlurryAnalytics.initialize(androidKey: "QX7WZTNJ8468J6SR8DR3", iosKey: "XCCWQH4MCD45JHSM4BYN", enableLog: true);
       await FlurryAnalytics.logEvent("test");
 
 
