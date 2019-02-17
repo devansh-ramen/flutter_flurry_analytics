@@ -8,8 +8,8 @@ class FlurryAnalytics {
 
   static Future<Null> initialize({String androidKey = "", String iosKey = "", bool enableLog = true}) async {
     Map<String, dynamic> args = <String, dynamic>{};
-    args.putIfAbsent("api_key_android", () => androidKEY);
-    args.putIfAbsent("api_key_ios", () => iosKEY);
+    args.putIfAbsent("api_key_android", () => androidKey);
+    args.putIfAbsent("api_key_ios", () => iosKey);
     args.putIfAbsent("is_log_enabled", () => enableLog);
 
     await _channel.invokeMethod('initialize', args);
@@ -22,6 +22,15 @@ class FlurryAnalytics {
     args.putIfAbsent("message", () => message);
 
     await _channel.invokeMethod('logEvent', args);
+    return null;
+  }
+
+
+  static Future<Null> setUserId(String userId) async {
+    Map<String, dynamic> args = <String, dynamic>{};
+    args.putIfAbsent("userId", () => userId);
+
+    await _channel.invokeMethod('userId', args);
     return null;
   }
 }

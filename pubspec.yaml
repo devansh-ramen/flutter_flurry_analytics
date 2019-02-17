@@ -1,6 +1,6 @@
 name: flurry_analytics
 description: A Flutter plugin for communicating to Flurry Analytics
-version: 0.0.3
+version: 0.0.4
 author: Devansh Ramen <devanshramen@gmail.com>
 homepage: https://github.com/devansh-ramen/flutter_flurry_analytics
 

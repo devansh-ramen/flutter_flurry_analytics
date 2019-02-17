@@ -11,8 +11,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 
-import static android.content.ContentValues.TAG;
-
 /** FlurryAnalyticsPlugin */
 public class FlurryAnalyticsPlugin implements MethodCallHandler {
   private Context activity;
@@ -38,10 +36,15 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
             .withContinueSessionMillis(10000)
             .withLogLevel(Log.DEBUG)
             .build(activity, FLURRY_API_KEY);
+
   }
 
   private void logEvent(String message) {
     FlurryAgent.logEvent(message);
+  }
+
+  private void setUserId(String userId) {
+    FlurryAgent.setUserId(userId);
   }
 
   @Override
@@ -55,7 +58,11 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
     } else if (call.method.equals("logEvent")) {
       String message = call.argument("message").toString();
       logEvent(message);
-      Log.d(TAG, "onMethodCall: log event");
+
+    } else if (call.method.equals("userId")) {
+        String userId = call.argument("userId").toString();
+        setUserId(userId);
+
     } else {
       result.notImplemented();
     }

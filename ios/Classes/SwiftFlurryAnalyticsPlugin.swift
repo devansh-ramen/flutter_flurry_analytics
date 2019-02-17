@@ -32,7 +32,11 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
         let arguments = call.arguments as? NSDictionary
         let message = arguments!["message"] as? String
         Flurry.logEvent(message!);
-        print("log event")
+
+    } else if (call.method.elementsEqual("userId")) {
+        let arguments = call.arguments as? NSDictionary
+        let userId = arguments!["userId"] as? String
+        Flurry.setUserID(userId!)
     }
     result("iOS " + UIDevice.current.systemVersion)
   }
