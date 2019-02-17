@@ -15,13 +15,12 @@ samples, guidance on mobile development, and a full API reference.
 
 
 ## Usage
-git remote add origin https://github.com/devansh-ramen/flutter_flurry_analytics.git
 import the library via
 ``` dart
 import 'package:flurry_analytics/flurry_analytics.dart';
 ```
 
 ``` dart
-await FlurryAnalytics.initialize(androidKey: "QX7WZTNJ8468J6SR8DR3", iosKey: "XCCWQH4MCD45JHSM4BYN", enableLog: true);
+await FlurryAnalytics.initialize(androidKey: "xxx", iosKey: "xxx", enableLog: true);
 FlurryAnalytics.logEvent("event name");
 ```
