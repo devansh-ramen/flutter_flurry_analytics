@@ -12,7 +12,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
 
   @override
   void initState() {
@@ -24,24 +23,17 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      await FlurryAnalytics.initialize(androidKey: "QX7WZTNJ8468J6SR8DR3", iosKey: "XCCWQH4MCD45JHSM4BYN", enableLog: true);
-      await FlurryAnalytics.setUserId("test");
-      await FlurryAnalytics.logEvent("test");
+    await FlurryAnalytics.initialize(androidKey: "QX7WZTNJ8468J6SR8DR3", iosKey: "XCCWQH4MCD45JHSM4BYN", enableLog: true);
+    await FlurryAnalytics.setUserId("1234");
+    await FlurryAnalytics.logEvent("testflurry");
 
 
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    setState(() {
-      _platformVersion = platformVersion;
-    });
   }
 
   @override
@@ -52,7 +44,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Flurry analytics example.'),
         ),
       ),
     );

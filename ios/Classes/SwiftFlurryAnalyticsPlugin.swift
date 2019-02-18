@@ -15,7 +15,7 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
         let apiKey = arguments!["api_key_ios"] as? String
         let isLogEnabled = arguments!["is_log_enabled"] as? Bool
 
-        if (isLogEnabled) {
+        if (isLogEnabled!) {
             Flurry.startSession(apiKey!, with: FlurrySessionBuilder
               .init()
               .withCrashReporting(true)
@@ -28,17 +28,20 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
                 .withLogLevel(FlurryLogLevelNone))
         }
 
+        result(nil)
+
     } else if (call.method.elementsEqual("logEvent")) {
         let arguments = call.arguments as? NSDictionary
         let message = arguments!["message"] as? String
         Flurry.logEvent(message!);
+        result(nil)
 
     } else if (call.method.elementsEqual("userId")) {
         let arguments = call.arguments as? NSDictionary
         let userId = arguments!["userId"] as? String
         Flurry.setUserID(userId!)
+        result(nil)
     }
-    result("iOS " + UIDevice.current.systemVersion)
   }
 
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.flurry.android.FlurryAgent;
+import com.flurry.android.FlurryAgentListener;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -28,17 +29,6 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
     this.channel.setMethodCallHandler(this);
   }
 
-
-  private void initializeFlurry(String FLURRY_API_KEY, boolean isLogEnabled) {
-    new FlurryAgent.Builder()
-            .withLogEnabled(isLogEnabled)
-            .withCaptureUncaughtExceptions(true)
-            .withContinueSessionMillis(10000)
-            .withLogLevel(Log.DEBUG)
-            .build(activity, FLURRY_API_KEY);
-
-  }
-
   private void logEvent(String message) {
     FlurryAgent.logEvent(message);
   }
@@ -48,20 +38,34 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
   }
 
   @Override
-  public void onMethodCall(MethodCall call, Result result) {
+  public void onMethodCall(MethodCall call, final Result result) {
     if (call.method.equals("initialize")) {
       String API_KEY = call.argument("api_key_android");
       boolean showLog = call.argument("is_log_enabled");
 
-      initializeFlurry(API_KEY, showLog);
+      //initializeFlurry(API_KEY, showLog);
+
+      new FlurryAgent.Builder()
+              .withLogEnabled(showLog)
+              .withCaptureUncaughtExceptions(true)
+              .withContinueSessionMillis(10000)
+              .withLogLevel(Log.DEBUG)
+              .withListener(new FlurryAgentListener() {
+                @Override
+                public void onSessionStarted() {
+                  result.success(null);
+                }
+              }).build(activity, API_KEY);
 
     } else if (call.method.equals("logEvent")) {
       String message = call.argument("message").toString();
       logEvent(message);
+      result.success(null);
 
     } else if (call.method.equals("userId")) {
         String userId = call.argument("userId").toString();
         setUserId(userId);
+        result.success(null);
 
     } else {
       result.notImplemented();
