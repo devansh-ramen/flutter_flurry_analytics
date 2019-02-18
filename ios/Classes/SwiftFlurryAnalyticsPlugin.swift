@@ -15,7 +15,7 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
         let apiKey = arguments!["api_key_ios"] as? String
         let isLogEnabled = arguments!["is_log_enabled"] as? Bool
 
-        if (isLogEnabled!) {
+        if (isLogEnabled) {
             Flurry.startSession(apiKey!, with: FlurrySessionBuilder
               .init()
               .withCrashReporting(true)
