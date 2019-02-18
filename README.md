@@ -4,7 +4,7 @@ A Flutter plugin to use Flurry Analytics. This plugin logs sessions, crash detec
 
 ## Getting Started
 
-This is a Flutter plugin to use Flurry Analytics. It implements native calls to [Flurry for Android SDK][flurry_sdk_android] and [iOS SDK][flurry_sdk_ios]. The plugin logs sessions, crash detections, simple event logging, and UserId.
+This is a Flutter plugin to use Flurry Analytics. It implements native calls to [Flurry Android SDK][flurry_sdk_android] and [Flurry iOS SDK][flurry_sdk_ios]. The plugin logs sessions, crash detections, simple event logging, and UserId.
 
 
 
