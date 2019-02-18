@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class FlurryAnalytics {
-  static const MethodChannel _channel =
-      const MethodChannel('flurry_analytics');
+  static const MethodChannel _channel = const MethodChannel('flurry_analytics');
 
-  static Future<Null> initialize({String androidKey = "", String iosKey = "", bool enableLog = true}) async {
+  static Future<Null> initialize(
+      {String androidKey = "",
+      String iosKey = "",
+      bool enableLog = true}) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("api_key_android", () => androidKey);
     args.putIfAbsent("api_key_ios", () => iosKey);
@@ -24,7 +26,6 @@ class FlurryAnalytics {
     await _channel.invokeMethod('logEvent', args);
     return null;
   }
-
 
   static Future<Null> setUserId(String userId) async {
     Map<String, dynamic> args = <String, dynamic>{};

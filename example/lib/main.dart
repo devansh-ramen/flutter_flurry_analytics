@@ -12,7 +12,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -23,17 +22,17 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String platformVersion;
     // Platform messages may fail, so we use a try/catch PlatformException.
-    await FlurryAnalytics.initialize(androidKey: "QX7WZTNJ8468J6SR8DR3", iosKey: "XCCWQH4MCD45JHSM4BYN", enableLog: true);
+    await FlurryAnalytics.initialize(
+        androidKey: "QX7WZTNJ8468J6SR8DR3",
+        iosKey: "XCCWQH4MCD45JHSM4BYN",
+        enableLog: true);
     await FlurryAnalytics.setUserId("1234");
     await FlurryAnalytics.logEvent("testflurry");
-
-
 
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
-
   }
 
   @override

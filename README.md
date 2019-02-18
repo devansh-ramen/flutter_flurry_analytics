@@ -1,17 +1,11 @@
 # flurry_analytics
 
-A Flutter plugin for communicating to Flurry Analytics. Allows for simple event logging, sessions, and crash detections.
+A Flutter plugin to use Flurry Analytics. This version logs sessions, crash detections, simple event logging, UserId. We plan to add more features.
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.io/developing-packages/) for Flurry Analytics,
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+This project is a Flutter plugin to use Flurry Analytics. We have integrated Flurry's Android and iOS SDKs and ported method calls for Flurry projects. Currently, we allow only for logs sessions, crash detections, simple event logging, UserId.
+https://developer.yahoo.com/flurry/docs/integrateflurry
 
 
 ## Usage
