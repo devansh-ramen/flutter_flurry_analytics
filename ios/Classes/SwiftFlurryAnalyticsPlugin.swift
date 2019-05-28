@@ -11,39 +11,48 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
 
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     if (call.method.elementsEqual("initialize")) {
-        let arguments = call.arguments as? NSDictionary
-        let apiKey = arguments!["api_key_ios"] as? String
-        let isLogEnabled = arguments!["is_log_enabled"] as? Bool
-
-        if (isLogEnabled!) {
-            Flurry.startSession(apiKey!, with: FlurrySessionBuilder
-              .init()
-              .withCrashReporting(true)
-              .withLogLevel(FlurryLogLevelAll))
-
-        } else {
-            Flurry.startSession(apiKey!, with: FlurrySessionBuilder
-                .init()
-                .withCrashReporting(true)
-                .withLogLevel(FlurryLogLevelNone))
-        }
-
-        result(nil)
-
+        handleInitialize(call, result)
     } else if (call.method.elementsEqual("logEvent")) {
-        let arguments = call.arguments as? NSDictionary
-        let message = arguments!["message"] as? String
-        Flurry.logEvent(message!);
-        result(nil)
-
+        handleLogEvent(call, result)
     } else if (call.method.elementsEqual("userId")) {
-        let arguments = call.arguments as? NSDictionary
-        let userId = arguments!["userId"] as? String
-        Flurry.setUserID(userId!)
-        result(nil)
+        handleSetUserId(call, result)
     }
   }
 
+  private func handleInitialize(_ call; FlutterMethodCall, _ result: @escaping FlutterResult) {
+    let arguments = call.arguments as? NSDictionary
+    if let _args = arguments {
+      let apiKey = _args["api_key_ios"] as? String
+      let isLogEnabled = _args["is_log_enabled"] as? Bool
 
+      if let _apiKey = apiKey, let _isLog = isLogEnabled {
+        Flurry.startSession(_apiKey, with: FlurrySessionBuilder
+          .init()
+          .withCrashReporting(true)
+          .withLogLevel(_isLog ? FlurryLogLevelAll : FlurryLogLevelNone))
+      }
+    }
+    result(nil)
+  }
 
+  private func handleLogEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    let arguments = call.arguments as? NSDictionary
+    if let _args = arguments {
+      let message = _args["message"] as? String
+      let parameters = _args["parameters"] as? NSDictionary
+
+      if let _message = message {
+        Flurry.logEvent(_message, withParameters: parameters);
+      }
+    }
+    result(nil)
+  }
+
+  private func handleSetUserId(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    let arguments = call.arguments as? NSDictionary
+    if let _args = arguments, let _userId = _args["userId"] as? String {
+      Flurry.setUserID(_userId)
+    }
+    result(nil)
+  }
 }
