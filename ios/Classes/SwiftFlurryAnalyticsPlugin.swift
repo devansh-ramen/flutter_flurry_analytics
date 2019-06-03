@@ -19,7 +19,7 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
     }
   }
 
-    private func handleInitialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+  private func handleInitialize(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     let arguments = call.arguments as? NSDictionary
     if let _args = arguments {
       let apiKey = _args["api_key_ios"] as? String

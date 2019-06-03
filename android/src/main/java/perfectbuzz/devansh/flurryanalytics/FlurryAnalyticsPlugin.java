@@ -57,12 +57,8 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
                 .withCaptureUncaughtExceptions(true)
                 .withContinueSessionMillis(10000)
                 .withLogLevel(Log.DEBUG)
-                .withListener(new FlurryAgentListener() {
-                    @Override
-                    public void onSessionStarted() {
-                        result.success(null);
-                    }
-                }).build(activity, apiKey);
+                .build(activity, apiKey);
+        result.success(null);
     }
 
     private void handleLogEvent(final MethodCall call, final Result result) {
