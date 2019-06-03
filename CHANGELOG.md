@@ -1,3 +1,9 @@
+## 0.0.9
+
+* Add possibility to log an event with parameters
+* Code improvement
+* Fix crash when go back to the app
+
 ## 0.0.4
 
 * Ability to log userId

@@ -8,32 +8,38 @@ This is a Flutter plugin to use Flurry Analytics. It implements native calls to 
 
 ## Installation
 
-Add flurry_analytics: ^0.0.8 in your pubspec.yaml dependencies.
+Add `flurry_analytics: ^0.0.8` in your pubspec.yaml dependencies.
 
 ## How to use #
 
-importing the library :
+Importing the library :
 
 ``` dart
 import 'package:flurry_analytics/flurry_analytics.dart';
 ```
 
-initialization :
+Initialization :
 
 ``` dart
 await FlurryAnalytics.initialize(androidKey: "xxx", iosKey: "xxx", enableLog: true);
 ```
 
-logging/setting userId :
+Logging/setting UserId :
 
 ``` dart
 FlurryAnalytics.setUserId("1234");
 ```
 
-logging event:
+Logging event:
 
 ``` dart
 FlurryAnalytics.logEvent("event name");
+```
+
+Logging event with parameters:
+
+``` dart
+FlurryAnalytics.logEvent("event name", { "param1": "12"});
 ```
 
 [flurry_sdk_android]: https://developer.yahoo.com/flurry/docs/integrateflurry/android

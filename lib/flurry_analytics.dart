@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class FlurryAnalytics {
   static const MethodChannel _channel = const MethodChannel('flurry_analytics');
 
-  static Future<Null> initialize({
+  static Future<void> initialize({
     String androidKey = "",
     String iosKey = "",
     bool enableLog = true,
@@ -15,12 +15,10 @@ class FlurryAnalytics {
     args.putIfAbsent("api_key_ios", () => iosKey);
     args.putIfAbsent("is_log_enabled", () => enableLog);
 
-    await _channel.invokeMethod('initialize', args);
-
-    return null;
+    return await _channel.invokeMethod('initialize', args);
   }
 
-  static Future<Null> logEvent(
+  static Future<void> logEvent(
     String message, {
     Map<String, String> parameters,
   }) async {
@@ -28,15 +26,13 @@ class FlurryAnalytics {
     args.putIfAbsent("message", () => message);
     args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
 
-    await _channel.invokeMethod('logEvent', args);
-    return null;
+    return await _channel.invokeMethod('logEvent', args);
   }
 
-  static Future<Null> setUserId(String userId) async {
+  static Future<void> setUserId(String userId) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("userId", () => userId);
 
-    await _channel.invokeMethod('userId', args);
-    return null;
+    return await _channel.invokeMethod('userId', args);
   }
 }
