@@ -14,6 +14,8 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
         handleInitialize(call, result)
     } else if (call.method.elementsEqual("logEvent")) {
         handleLogEvent(call, result)
+    } else if (call.method.elementsEqual("endTimedEvent")) {
+        handleEndTimedEvent(call, result)
     } else if (call.method.elementsEqual("userId")) {
         handleSetUserId(call, result)
     }
@@ -38,12 +40,20 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
   private func handleLogEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     let arguments = call.arguments as? NSDictionary
     if let _args = arguments {
-      let message = _args["message"] as? String
+      let event = _args["event"] as? String
       let parameters = _args["parameters"] as? [AnyHashable: Any]
 
-      if let _message = message {
-        Flurry.logEvent(_message, withParameters: parameters);
+      if let _event = event {
+        Flurry.logEvent(_event, withParameters: parameters);
       }
+    }
+    result(nil)
+  }
+
+  private func handleEndTimedEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+    let arguments = call.arguments as? NSDictionary
+    if let _args = arguments, let _event = _args["event"] as? String {
+        Flurry.endTimedEvent(_event, withParameters: nil);
     }
     result(nil)
   }

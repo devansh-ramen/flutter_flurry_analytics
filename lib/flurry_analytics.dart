@@ -15,24 +15,31 @@ class FlurryAnalytics {
     args.putIfAbsent("api_key_ios", () => iosKey);
     args.putIfAbsent("is_log_enabled", () => enableLog);
 
-    return await _channel.invokeMethod('initialize', args);
+    await _channel.invokeMethod<void>('initialize', args);
   }
 
   static Future<void> logEvent(
-    String message, {
+    String event, {
     Map<String, String> parameters,
   }) async {
     Map<String, dynamic> args = <String, dynamic>{};
-    args.putIfAbsent("message", () => message);
+    args.putIfAbsent("event", () => event);
     args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
 
-    return await _channel.invokeMethod('logEvent', args);
+    await _channel.invokeMethod<void>('logEvent', args);
+  }
+
+  static Future<void> endTimedEvent(String event) async {
+    Map<String, dynamic> args = <String, dynamic>{};
+    args.putIfAbsent("event", () => event);
+
+    await _channel.invokeMethod<void>('endTimedEvent', args);
   }
 
   static Future<void> setUserId(String userId) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("userId", () => userId);
 
-    return await _channel.invokeMethod('userId', args);
+    await _channel.invokeMethod<void>('userId', args);
   }
 }

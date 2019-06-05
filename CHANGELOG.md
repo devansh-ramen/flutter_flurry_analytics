@@ -1,3 +1,7 @@
+## 0.1.0
+
+* Added possibility to send the duration of an event with `endTimedEvent`
+
 ## 0.0.9
 
 * Add possibility to log an event with parameters

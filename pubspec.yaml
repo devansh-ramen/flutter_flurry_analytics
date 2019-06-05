@@ -1,6 +1,6 @@
 name: flurry_analytics
-description: A Flutter plugin to use Flurry Analytics. This version logs sessions, crash detections, simple event logging, UserId. We plan to add more features.
-version: 0.0.9
+description: A Flutter plugin to use Flurry Analytics. This version logs sessions, crash detections, simple event logging, UserId, and EndTimedEvent. We plan to add more features.
+version: 0.1.0
 author: Devansh Ramen <devanshramen@gmail.com>
 homepage: https://github.com/devansh-ramen/flutter_flurry_analytics
 
