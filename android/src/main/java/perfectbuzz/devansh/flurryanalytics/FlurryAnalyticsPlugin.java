@@ -54,8 +54,12 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
         String apiKey = call.argument("api_key_android");
         boolean showLog = call.argument("is_log_enabled");
 
-        new FlurryAgent.Builder().withLogEnabled(showLog).withCaptureUncaughtExceptions(true)
-                .withContinueSessionMillis(10000).withLogLevel(Log.DEBUG).build(activity, apiKey);
+        new FlurryAgent.Builder()
+            .withLogEnabled(showLog)
+            .withCaptureUncaughtExceptions(true)
+            .withContinueSessionMillis(10000)
+            .withLogLevel(Log.DEBUG)
+            .build(activity, apiKey);
         result.success(null);
     }
 
@@ -78,6 +82,7 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
 
     private void handleSetUserId(final MethodCall call, final Result result) {
         String userId = call.argument("userId");
+        
         if (userId != null)
             FlurryAgent.setUserId(userId);
         result.success(null);
