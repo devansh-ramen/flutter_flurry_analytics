@@ -33,7 +33,7 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
             .withLogLevel(_isLog ? FlurryLogLevelAll : FlurryLogLevelNone)
             .withCrashReporting(true)
         if let _version = version {
-            builder = builder.setAppVersion(overrideVersion)
+            builder = builder?.withAppVersion(_version)
         }
         
         Flurry.startSession(_apiKey, with: builder)
