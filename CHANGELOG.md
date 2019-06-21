@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Added possibility to override app version (only iOS)
+
 ## 0.1.0
 
 * Added possibility to send the duration of an event with `endTimedEvent`
