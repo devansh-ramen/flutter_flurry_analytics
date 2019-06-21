@@ -26,12 +26,17 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
     if let _args = arguments {
       let apiKey = _args["api_key_ios"] as? String
       let isLogEnabled = _args["is_log_enabled"] as? Bool
+      let version = _args["app_version"] as? String
 
       if let _apiKey = apiKey, let _isLog = isLogEnabled {
-        Flurry.startSession(_apiKey, with: FlurrySessionBuilder
-          .init()
-          .withCrashReporting(true)
-          .withLogLevel(_isLog ? FlurryLogLevelAll : FlurryLogLevelNone))
+        var builder = FlurrySessionBuilder.init()
+            .withLogLevel(_isLog ? FlurryLogLevelAll : FlurryLogLevelNone)
+            .withCrashReporting(true)
+        if let _version = version {
+            builder = builder.setAppVersion(overrideVersion)
+        }
+        
+        Flurry.startSession(_apiKey, with: builder)
       }
     }
     result(nil)
