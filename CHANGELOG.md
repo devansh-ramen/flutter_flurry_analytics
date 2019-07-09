@@ -1,3 +1,7 @@
+## 0.1.2
+
+* Set channel constant to public for units/driver tests
+
 ## 0.1.1
 
 * Added possibility to override app version (only iOS)
