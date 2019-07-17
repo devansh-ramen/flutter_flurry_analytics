@@ -8,7 +8,7 @@ This is a Flutter plugin to use Flurry Analytics. It implements native calls to 
 
 ## Installation
 
-Add `flurry_analytics: ^0.1.0` in your pubspec.yaml dependencies.
+Add `flurry_analytics: ^0.1.2` in your pubspec.yaml dependencies.
 
 ## How to use #
 
