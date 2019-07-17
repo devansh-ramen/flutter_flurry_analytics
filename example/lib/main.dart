@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flurry_analytics/flurry_analytics.dart';
 
 void main() => runApp(MyApp());
@@ -21,9 +20,10 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initFlurry() async {
     await FlurryAnalytics.initialize(
-        androidKey: "QX7WZTNJ8468J6SR8DR3",
-        iosKey: "XCCWQH4MCD45JHSM4BYN",
-        enableLog: true);
+      androidKey: "QX7WZTNJ8468J6SR8DR3",
+      iosKey: "XCCWQH4MCD45JHSM4BYN",
+      enableLog: true,
+    );
     await FlurryAnalytics.setUserId("1234");
     await FlurryAnalytics.logEvent("testflurry");
   }
