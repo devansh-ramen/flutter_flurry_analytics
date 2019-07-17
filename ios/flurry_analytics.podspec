@@ -15,7 +15,7 @@ A Flutter plugin for communicating to Flurry Analytics
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'Flurry-iOS-SDK/FlurrySDK'
+  s.dependency 'Flurry-iOS-SDK/FlurrySDK', :modular_headers => true
 
   s.ios.deployment_target = '8.0'
 
