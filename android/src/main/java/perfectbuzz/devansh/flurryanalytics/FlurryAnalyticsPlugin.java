@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.flurry.android.FlurryAgent;
-import com.flurry.android.FlurryAgentListener;
+import com.flurry.android.FlurryPerformance;
 
 import java.util.Map;
 
@@ -52,14 +52,22 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
 
     private void handleInitialize(final MethodCall call, final Result result) {
         String apiKey = call.argument("api_key_android");
-        boolean showLog = call.argument("is_log_enabled");
+        boolean isLogEnabled = call.argument("is_log_enabled");
+        boolean isPerfMetrics = call.argument("is_performance_metrics");
+        String appVersion = call.argument("app_version");
 
         new FlurryAgent.Builder()
-            .withLogEnabled(showLog)
-            .withCaptureUncaughtExceptions(true)
-            .withContinueSessionMillis(10000)
-            .withLogLevel(Log.DEBUG)
-            .build(activity, apiKey);
+                .withLogEnabled(isLogEnabled)
+                .withCaptureUncaughtExceptions(true)
+                .withContinueSessionMillis(10000)
+                .withLogLevel(Log.DEBUG)
+                .withPerformanceMetrics(isPerfMetrics ? FlurryPerformance.All : FlurryPerformance.None)
+                .build(activity, apiKey);
+
+        if (appVersion != null) {
+            FlurryAgent.setVersionName(appVersion);
+        }
+
         result.success(null);
     }
 
@@ -82,7 +90,7 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
 
     private void handleSetUserId(final MethodCall call, final Result result) {
         String userId = call.argument("userId");
-        
+
         if (userId != null)
             FlurryAgent.setUserId(userId);
         result.success(null);

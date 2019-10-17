@@ -5,17 +5,20 @@ import 'package:flutter/services.dart';
 class FlurryAnalytics {
   static const MethodChannel channel = const MethodChannel('flurry_analytics');
 
-  /// Initialize Flurry Analytics (appVersion is ONLY for iOS)
+  /// Initialize Flurry Analytics
+  /// `performanceMetrics` is ONLY for Android
   static Future<void> initialize({
     String androidKey = "",
     String iosKey = "",
     bool enableLog = true,
+    bool performanceMetrics = false,
     String appVersion,
   }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("api_key_android", () => androidKey);
     args.putIfAbsent("api_key_ios", () => iosKey);
     args.putIfAbsent("is_log_enabled", () => enableLog);
+    args.putIfAbsent("is_performance_metrics", () => performanceMetrics);
     args.putIfAbsent("app_version", () => appVersion);
 
     await channel.invokeMethod<void>('initialize', args);
