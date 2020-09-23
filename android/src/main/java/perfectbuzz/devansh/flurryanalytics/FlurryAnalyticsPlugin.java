@@ -61,7 +61,7 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
                 .withCaptureUncaughtExceptions(true)
                 .withContinueSessionMillis(10000)
                 .withLogLevel(Log.DEBUG)
-                .withPerformanceMetrics(isPerfMetrics ? FlurryPerformance.All : FlurryPerformance.None)
+                .withPerformanceMetrics(isPerfMetrics ? FlurryPerformance.ALL : FlurryPerformance.NONE)
                 .build(activity, apiKey);
 
         if (appVersion != null) {
