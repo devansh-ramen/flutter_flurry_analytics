@@ -44,12 +44,16 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
 
   private func handleLogEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     let arguments = call.arguments as? NSDictionary
+
     if let _args = arguments {
       let event = _args["event"] as? String
       let parameters = _args["parameters"] as? [AnyHashable: Any]
+      var timed = _args["timed"] as? Bool
+      if timed == nil {timed = false}
 
       if let _event = event {
-        Flurry.logEvent(_event, withParameters: parameters);
+
+        Flurry.logEvent(_event, withParameters: parameters, timed: timed!);
       }
     }
     result(nil)

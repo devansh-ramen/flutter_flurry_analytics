@@ -66,9 +66,10 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
     private void handleLogEvent(final MethodCall call, final Result result) {
         String eventName = call.argument("event");
         Map<String, String> parameters = call.argument("parameters");
+        boolean timed = call.argument("timed");
 
         if (eventName != null && parameters != null)
-            FlurryAgent.logEvent(eventName, parameters);
+            FlurryAgent.logEvent(eventName, parameters, timed);
         result.success(null);
     }
 
