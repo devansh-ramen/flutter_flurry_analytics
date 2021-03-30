@@ -60,10 +60,18 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
   }
 
   private func handleEndTimedEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
-    let arguments = call.arguments as? NSDictionary
-    if let _args = arguments, let _event = _args["event"] as? String {
-        Flurry.endTimedEvent(_event, withParameters: nil);
-    }
+
+      let arguments = call.arguments as? NSDictionary
+
+      if let _args = arguments {
+        let event = _args["event"] as? String
+        let parameters = _args["parameters"] as? [AnyHashable: Any]
+
+        if let _event = event {
+
+          Flurry.endTimedEvent(_event, withParameters: parameters);
+        }
+      }
     result(nil)
   }
 

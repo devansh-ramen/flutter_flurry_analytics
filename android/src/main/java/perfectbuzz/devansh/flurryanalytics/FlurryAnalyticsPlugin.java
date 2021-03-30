@@ -75,6 +75,15 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
 
     private void handleEndTimedEvent(final MethodCall call, final Result result) {
         String eventName = call.argument("event");
+        Map<String, String> parameters = call.argument("parameters");
+
+        if (eventName != null && parameters != null)
+            FlurryAgent.endTimedEvent(eventName, parameters);
+        result.success(null);
+    }
+
+    private void handleEndTimedEventOld(final MethodCall call, final Result result) {
+        String eventName = call.argument("event");
 
         if (eventName != null)
             FlurryAgent.endTimedEvent(eventName);

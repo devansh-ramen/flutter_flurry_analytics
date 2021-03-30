@@ -34,9 +34,12 @@ class FlurryAnalytics {
     await channel.invokeMethod<void>('logEvent', args);
   }
 
-  static Future<void> endTimedEvent(String event) async {
+  static Future<void> endTimedEvent(String event, {
+    Map<String, String> parameters,
+  }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("event", () => event);
+    args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
 
     await channel.invokeMethod<void>('endTimedEvent', args);
   }
