@@ -45,6 +45,8 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
             handleEndTimedEvent(call, result);
         } else if (call.method.equals("userId")) {
             handleSetUserId(call, result);
+        }  else if (call.method.equals("logError")) {
+            handleLogError(call, result);
         } else {
             result.notImplemented();
         }
@@ -79,6 +81,17 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
 
         if (eventName != null && parameters != null)
             FlurryAgent.endTimedEvent(eventName, parameters);
+        result.success(null);
+    }
+
+    private void handleLogError(final MethodCall call, final Result result) {
+        String errorName = call.argument("error");
+        String message = call.argument("error");
+        String className = "";
+        Map<String, String> parameters = call.argument("parameters");
+
+        if (errorName != null && parameters != null && message!= null)
+            FlurryAgent.onError(errorName,message,className,parameters);
         result.success(null);
     }
 
