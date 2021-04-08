@@ -50,4 +50,17 @@ class FlurryAnalytics {
 
     await channel.invokeMethod<void>('userId', args);
   }
+
+  static Future<void> logError(
+      String error, {
+        Map<String, String> parameters,
+        String message,
+      }) async {
+    Map<String, dynamic> args = <String, dynamic>{};
+    args.putIfAbsent("error", () => error);
+    args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
+    args.putIfAbsent("message", () => message);
+
+    await channel.invokeMethod<void>('logError', args);
+  }
 }
