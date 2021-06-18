@@ -45,6 +45,8 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
             handleEndTimedEvent(call, result);
         } else if (call.method.equals("userId")) {
             handleSetUserId(call, result);
+        }  else if (call.method.equals("logError")) {
+            handleLogError(call, result);
         } else {
             result.notImplemented();
         }
@@ -66,13 +68,34 @@ public class FlurryAnalyticsPlugin implements MethodCallHandler {
     private void handleLogEvent(final MethodCall call, final Result result) {
         String eventName = call.argument("event");
         Map<String, String> parameters = call.argument("parameters");
+        boolean timed = call.argument("timed");
 
         if (eventName != null && parameters != null)
-            FlurryAgent.logEvent(eventName, parameters);
+            FlurryAgent.logEvent(eventName, parameters, timed);
         result.success(null);
     }
 
     private void handleEndTimedEvent(final MethodCall call, final Result result) {
+        String eventName = call.argument("event");
+        Map<String, String> parameters = call.argument("parameters");
+
+        if (eventName != null && parameters != null)
+            FlurryAgent.endTimedEvent(eventName, parameters);
+        result.success(null);
+    }
+
+    private void handleLogError(final MethodCall call, final Result result) {
+        String errorName = call.argument("error");
+        String message = call.argument("message");
+        String className = "";
+        Map<String, String> parameters = call.argument("parameters");
+
+        if (errorName != null && parameters != null && message!= null)
+            FlurryAgent.onError(errorName,message,className,parameters);
+        result.success(null);
+    }
+
+    private void handleEndTimedEventOld(final MethodCall call, final Result result) {
         String eventName = call.argument("event");
 
         if (eventName != null)

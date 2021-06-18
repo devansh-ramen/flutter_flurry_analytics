@@ -18,6 +18,8 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
         handleEndTimedEvent(call, result)
     } else if (call.method.elementsEqual("userId")) {
         handleSetUserId(call, result)
+    } else if (call.method.elementsEqual("logError")) {
+        handleLogError(call, result)
     }
   }
 
@@ -44,24 +46,51 @@ public class SwiftFlurryAnalyticsPlugin: NSObject, FlutterPlugin {
 
   private func handleLogEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     let arguments = call.arguments as? NSDictionary
+
     if let _args = arguments {
       let event = _args["event"] as? String
       let parameters = _args["parameters"] as? [AnyHashable: Any]
+      var timed = _args["timed"] as? Bool
+      if timed == nil {timed = false}
 
       if let _event = event {
-        Flurry.logEvent(_event, withParameters: parameters);
+
+        Flurry.logEvent(_event, withParameters: parameters, timed: timed!);
       }
     }
     result(nil)
   }
 
   private func handleEndTimedEvent(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
-    let arguments = call.arguments as? NSDictionary
-    if let _args = arguments, let _event = _args["event"] as? String {
-        Flurry.endTimedEvent(_event, withParameters: nil);
-    }
+
+      let arguments = call.arguments as? NSDictionary
+
+      if let _args = arguments {
+        let event = _args["event"] as? String
+        let parameters = _args["parameters"] as? [AnyHashable: Any]
+
+        if let _event = event {
+
+          Flurry.endTimedEvent(_event, withParameters: parameters);
+        }
+      }
     result(nil)
   }
+    private func handleLogError(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+      let arguments = call.arguments as? NSDictionary
+
+      if let _args = arguments {
+        let error = _args["error"] as? String
+        let message = _args["message"] as? String
+        let parameters = _args["parameters"] as? [AnyHashable: Any]
+
+        if let _error = error {
+
+            Flurry.logError(_error, message: message, error: nil, withParameters: parameters);
+        }
+      }
+      result(nil)
+    }
 
   private func handleSetUserId(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
     let arguments = call.arguments as? NSDictionary

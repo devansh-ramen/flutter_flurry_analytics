@@ -24,17 +24,22 @@ class FlurryAnalytics {
   static Future<void> logEvent(
     String event, {
     Map<String, String> parameters,
+    bool timed,
   }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("event", () => event);
     args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
+    args.putIfAbsent("timed", () => timed ?? false);
 
     await channel.invokeMethod<void>('logEvent', args);
   }
 
-  static Future<void> endTimedEvent(String event) async {
+  static Future<void> endTimedEvent(String event, {
+    Map<String, String> parameters,
+  }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("event", () => event);
+    args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
 
     await channel.invokeMethod<void>('endTimedEvent', args);
   }
@@ -44,5 +49,18 @@ class FlurryAnalytics {
     args.putIfAbsent("userId", () => userId);
 
     await channel.invokeMethod<void>('userId', args);
+  }
+
+  static Future<void> logError(
+      String error, {
+        Map<String, String> parameters,
+        String message,
+      }) async {
+    Map<String, dynamic> args = <String, dynamic>{};
+    args.putIfAbsent("error", () => error);
+    args.putIfAbsent("parameters", () => parameters ?? <String, String>{});
+    args.putIfAbsent("message", () => message);
+
+    await channel.invokeMethod<void>('logError', args);
   }
 }
