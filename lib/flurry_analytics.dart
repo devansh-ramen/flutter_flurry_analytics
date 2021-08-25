@@ -8,11 +8,11 @@ class FlurryAnalytics {
   /// Initialize Flurry Analytics
   /// `performanceMetrics` is ONLY for Android
   static Future<void> initialize({
-    String androidKey = "",
-    String iosKey = "",
+    required String androidKey,
+    required String iosKey,
     bool enableLog = true,
     bool performanceMetrics = false,
-    String appVersion,
+    String? appVersion,
   }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("api_key_android", () => androidKey);
@@ -26,7 +26,7 @@ class FlurryAnalytics {
 
   static Future<void> logEvent(
     String event, {
-    Map<String, String> parameters,
+    Map<String, String>? parameters,
   }) async {
     Map<String, dynamic> args = <String, dynamic>{};
     args.putIfAbsent("event", () => event);

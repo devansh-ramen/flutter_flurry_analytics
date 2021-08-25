@@ -34,5 +34,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.flurry.android:analytics:12.7.0'
+    implementation 'com.flurry.android:analytics:13.0.0'
 }
