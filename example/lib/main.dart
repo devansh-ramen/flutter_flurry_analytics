@@ -20,8 +20,8 @@ class _MyAppState extends State<MyApp> {
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initFlurry() async {
     await FlurryAnalytics.initialize(
-      androidKey: "QX7WZTNJ8468J6SR8DR3",
-      iosKey: "XCCWQH4MCD45JHSM4BYN",
+      androidKey: "XXXX",
+      iosKey: "XXXX",
       enableLog: true,
     );
     await FlurryAnalytics.setUserId("1234");
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('Flurry analytics example.'),
         ),
       ),

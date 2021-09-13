@@ -1,3 +1,12 @@
+## 0.2.0
+
+* Migrate to null safety
+* Update Flurry Android SDK to 12.7.0
+
+## 0.1.3
+
+* Update Flurry Android SDK to 12.7.0
+
 ## 0.1.2
 
 * Set channel constant to public for units/driver tests
